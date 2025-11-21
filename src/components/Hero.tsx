@@ -1,18 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <div className="w-full h-full bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background/95" />
+      </div>
+
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card/50 pointer-events-none" />
       
       {/* Glow Effects */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
@@ -44,20 +45,22 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
             <Button
+              asChild
               size="lg"
-              onClick={() => scrollToSection("contact")}
               className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 glow-primary group"
             >
-              Book a Consultation
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <Link to="/contact">
+                Book a Consultation
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button
+              asChild
               size="lg"
               variant="outline"
-              onClick={() => scrollToSection("services")}
               className="text-lg px-8 py-6 border-primary/30 hover:border-primary/60 hover:bg-primary/5"
             >
-              View Our Packages
+              <Link to="/packages">View Our Packages</Link>
             </Button>
           </div>
 

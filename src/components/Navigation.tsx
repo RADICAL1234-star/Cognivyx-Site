@@ -20,60 +20,86 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass py-4" : "bg-transparent py-6"
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
+        isScrolled
+          ? "glass border-border/70 py-3"
+          : "bg-background/70 backdrop-blur-md border-border/50 py-4"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="Cognivyx" className="h-8 md:h-10" />
-            <span className="font-heading font-bold text-xl md:text-2xl text-foreground">Cognivyx</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex items-center gap-3" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img src={logo} alt="Cognivyx" className="h-8 md:h-10" />
+              <span className="font-heading font-bold text-xl md:text-2xl text-foreground">Cognivyx</span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link
+              to="/"
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/' ? 'text-foreground' : ''}`}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Home
+              {location.pathname === '/' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
+            </Link>
+            <Link
               to="/services"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/services' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/services' ? 'text-foreground' : ''}`}
             >
               Services
+              {location.pathname === '/services' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Link
               to="/packages"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/packages' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/packages' ? 'text-foreground' : ''}`}
             >
               Packages
+              {location.pathname === '/packages' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Link
               to="/management-plans"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/management-plans' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/management-plans' ? 'text-foreground' : ''}`}
             >
               Management Plans
+              {location.pathname === '/management-plans' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Link
               to="/past-projects"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/past-projects' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/past-projects' ? 'text-foreground' : ''}`}
             >
-              Past Projects
-            </Link>
-            <Link
-              to="/case-studies"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/case-studies' ? 'text-foreground' : ''}`}
-            >
-              Case Studies
+              Work
+              {location.pathname === '/past-projects' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Link
               to="/newsletter"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/newsletter' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname.startsWith('/newsletter') ? 'text-foreground' : ''}`}
             >
               Newsletter
+              {location.pathname.startsWith('/newsletter') && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Link
               to="/about"
-              className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/about' ? 'text-foreground' : ''}`}
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname === '/about' ? 'text-foreground' : ''}`}
             >
               About
+              {location.pathname === '/about' && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
             </Link>
             <Button
               asChild
@@ -96,6 +122,13 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 glass rounded-lg p-6 space-y-4 animate-fade-in">
             <Link
+              to="/"
+              onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Home
+            </Link>
+            <Link
               to="/services"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
@@ -121,14 +154,7 @@ const Navigation = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
             >
-              Past Projects
-            </Link>
-            <Link
-              to="/case-studies"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Case Studies
+              Work
             </Link>
             <Link
               to="/newsletter"

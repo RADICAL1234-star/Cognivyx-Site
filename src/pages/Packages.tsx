@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Rocket, Zap, Crown, Check, X } from "lucide-react";
+import { Rocket, Zap, Crown, Check, X, Wrench } from "lucide-react";
 
 const Packages = () => {
   const packages = [
@@ -29,7 +29,8 @@ const Packages = () => {
         "2 revision rounds",
       ],
       bestFor: "Small businesses & startups getting started with automation",
-      timeline: "2-3 weeks",
+      timeline: "3–7 business days",
+      disclaimer: "Early completion does not reduce or exempt any payment obligations.",
       technologies: "Make.com, Zapier, Basic APIs",
     },
     {
@@ -57,7 +58,8 @@ const Packages = () => {
         "3 revision rounds",
       ],
       bestFor: "Growing businesses that need robust automation",
-      timeline: "3-5 weeks",
+      timeline: "8–10 business days",
+      disclaimer: "Early completion does not reduce or exempt any payment obligations.",
       technologies: "Make.com, Custom APIs, AI Integration, Database Systems",
     },
     {
@@ -84,8 +86,38 @@ const Packages = () => {
         "Unlimited revisions",
       ],
       bestFor: "Enterprises requiring complete automation solutions",
-      timeline: "6-8 weeks",
+      timeline: "Up to 14 business days",
+      disclaimer: "Early completion does not reduce or exempt any payment obligations.",
       technologies: "Full Stack Development, Custom AI, Advanced Integrations, Enterprise Systems",
+    },
+    {
+      name: "CustomCore (Tailored Build Package)",
+      icon: Wrench,
+      price: "Custom Quotation",
+      description: "CustomCore is perfect for clients who don’t need a full website or full automation package.",
+      features: [
+        { name: "Custom Feature or System", included: true },
+        { name: "Standalone Automation or Chatbot", included: true },
+        { name: "Website-only Project (no automation)", included: true },
+        { name: "Automations without a Website", included: true },
+        { name: "Custom Dashboards or Internal Systems", included: true },
+        { name: "Unique Workflows Supported", included: true },
+      ],
+      deliverables: [
+        "Free discovery call",
+        "Requirements analysis",
+        "Technical feasibility check",
+        "Custom quotation based on scope",
+        "Delivery timeline estimate",
+        "Optional management plan selection after completion",
+      ],
+      bestFor: "Build exactly what you need — nothing more, nothing less.",
+      timeline: "Timeline varies depending on scope (quoted individually).",
+      technologies: "Tailored to project requirements",
+      cta: {
+        label: "Request Custom Build",
+        to: "/contact"
+      }
     },
   ];
 
@@ -111,8 +143,8 @@ const Packages = () => {
                 return (
                   <div
                     key={pkg.name}
-                    className={`relative glass p-8 rounded-xl ${
-                      pkg.popular ? "border-primary/50 shadow-2xl shadow-primary/20" : ""
+                    className={`relative glass p-8 rounded-xl transition-all duration-300 will-change-transform hover:-translate-y-1 hover:shadow-xl hover:border-primary/30 ${
+                      pkg.popular ? "border-primary/50 shadow-2xl shadow-primary/20" : "shadow-sm border-border/60"
                     }`}
                   >
                     {pkg.popular && (
@@ -155,6 +187,18 @@ const Packages = () => {
                         <p className="text-sm text-muted-foreground">
                           <strong className="text-foreground">Timeline:</strong> {pkg.timeline}
                         </p>
+                        {pkg.disclaimer && (
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {pkg.disclaimer}
+                          </p>
+                        )}
+                        {pkg.cta && (
+                          <div className="pt-4">
+                            <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
+                              <Link to={pkg.cta.to}>{pkg.cta.label}</Link>
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -166,66 +210,59 @@ const Packages = () => {
           {/* Comparison Table */}
           <section className="mb-32">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-12 text-center">Package Comparison</h2>
-            
             <div className="overflow-x-auto">
-              <table className="w-full max-w-6xl mx-auto">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-4 px-6 font-heading text-lg">Feature</th>
-                    <th className="text-center py-4 px-6 font-heading text-lg">LaunchCore</th>
-                    <th className="text-center py-4 px-6 font-heading text-lg bg-primary/5">FlowCore</th>
-                    <th className="text-center py-4 px-6 font-heading text-lg">EvoCore</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {packages[0].features.map((feature, idx) => (
-                    <tr key={feature.name} className="border-b border-border/50">
-                      <td className="py-4 px-6">{feature.name}</td>
-                      {packages.map((pkg) => {
-                        const feat = pkg.features[idx];
+              {(() => {
+                const comparable = packages.filter(
+                  (p) => p.name !== "CustomCore (Tailored Build Package)"
+                );
+                if (comparable.length === 0) return null;
+                const rowCount = Math.max(...comparable.map((p) => p.features.length));
+                return (
+                  <table className="w-full max-w-6xl mx-auto">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-left py-4 px-6 font-heading text-lg">Feature</th>
+                        {comparable.map((pkg) => (
+                          <th
+                            key={pkg.name}
+                            className={`text-center py-4 px-6 font-heading text-lg ${pkg.popular ? "bg-primary/5" : ""}`}
+                          >
+                            {pkg.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Array.from({ length: rowCount }).map((_, idx) => {
+                        const featureName = comparable[0].features[idx]?.name ?? `Feature ${idx + 1}`;
                         return (
-                          <td key={pkg.name} className={`text-center py-4 px-6 ${pkg.popular ? 'bg-primary/5' : ''}`}>
-                            {feat.value ? (
-                              feat.value
-                            ) : feat.included ? (
-                              <Check className="w-5 h-5 text-primary mx-auto" />
-                            ) : (
-                              <X className="w-5 h-5 text-muted-foreground mx-auto" />
-                            )}
-                          </td>
+                          <tr key={featureName} className="border-b border-border/50 transition-colors hover:bg-primary/5">
+                            <td className="py-4 px-6">{featureName}</td>
+                            {comparable.map((pkg) => {
+                              const feat = pkg.features[idx] as any;
+                              return (
+                                <td key={pkg.name} className={`text-center py-4 px-6 ${pkg.popular ? "bg-primary/5" : ""}`}>
+                                  {feat ? (
+                                    ('value' in feat) ? (
+                                      feat.value
+                                    ) : ('included' in feat && feat.included) ? (
+                                      <Check className="w-5 h-5 text-primary mx-auto" />
+                                    ) : (
+                                      <X className="w-5 h-5 text-muted-foreground mx-auto" />
+                                    )
+                                  ) : (
+                                    <span className="text-muted-foreground">-</span>
+                                  )}
+                                </td>
+                              );
+                            })}
+                          </tr>
                         );
                       })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          {/* Additional Information */}
-          <section className="mb-32">
-            <div className="max-w-4xl mx-auto glass p-12 rounded-xl">
-              <h2 className="font-heading text-3xl font-bold mb-6">What's Not Included</h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  <strong className="text-foreground">Domain Names:</strong> Not included. You'll need to purchase your own domain (typically R150-R200/year).
-                </p>
-                <p>
-                  <strong className="text-foreground">Hosting Fees:</strong> Separate from our build packages. Costs vary based on your system's requirements and chosen management option.
-                </p>
-                <p>
-                  <strong className="text-foreground">Usage-Based Costs:</strong> Some features incur usage costs:
-                </p>
-                <ul className="list-disc list-inside ml-4 space-y-2">
-                  <li>AI API tokens (based on actual usage)</li>
-                  <li>WhatsApp messaging fees (per message)</li>
-                  <li>SMS/calling costs (if applicable)</li>
-                  <li>Third-party API usage (varies by service)</li>
-                </ul>
-                <p className="pt-4">
-                  We design all systems to be cost-efficient and usage-based, meaning you only pay for what you actually use. We provide transparent cost estimates during the planning phase.
-                </p>
-              </div>
+                    </tbody>
+                  </table>
+                );
+              })()}
             </div>
           </section>
 
@@ -244,16 +281,16 @@ const Packages = () => {
               <div className="space-y-8">
                 <div>
                   <p className="text-lg text-muted-foreground mb-6">
-                    This option is ideal for clients who:
+                    Ideal for clients who:
                   </p>
                   <ul className="grid md:grid-cols-2 gap-4">
                     {[
-                      "Only need one specific system or feature",
+                      "Need one specific system or feature",
                       "Want a standalone automation or chatbot",
                       "Want a website without automation",
                       "Want automation without a website",
-                      "Need a specialized dashboard or AI solution",
-                      "Want to build unique workflows not covered in our packages",
+                      "Need a custom dashboard or AI solution",
+                      "Need unique workflows not in other packages",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -289,7 +326,7 @@ const Packages = () => {
                       "Niche businesses with specific needs",
                       "Startups needing a single feature",
                       "Companies replacing one outdated system",
-                      "Businesses wanting a custom workflow",
+                      "Businesses needing a custom workflow",
                     ].map((item) => (
                       <div key={item} className="flex items-start gap-3">
                         <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2.5 shrink-0" />

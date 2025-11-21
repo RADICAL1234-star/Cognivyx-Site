@@ -1,55 +1,43 @@
 import { Card } from "@/components/ui/card";
 import { 
-  Brain, 
-  MessageSquare, 
-  Zap, 
-  DollarSign, 
-  Shield, 
-  Building2,
-  Unlock,
-  Target
+  Clock,
+  HeartHandshake,
+  Lightbulb,
+  Layers,
+  MessageSquare,
+  BarChart3
 } from "lucide-react";
 
 const benefits = [
   {
-    icon: Brain,
-    title: "AI Automation Specialists",
-    description: "We specialize in cutting-edge AI automation tailored to your business needs",
+    icon: Clock,
+    title: "Time Savings",
+    description: "We help businesses reclaim the hours lost to manual work.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Client-Centric Execution",
+    description: "Every system is built with your workflow and goals in mind.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Innovation-Driven Design",
+    description: "We use cutting-edge AI and automation to move businesses forward.",
+  },
+  {
+    icon: Layers,
+    title: "Scalable Architecture",
+    description: "All solutions are built to grow with your company.",
   },
   {
     icon: MessageSquare,
     title: "Transparent Communication",
-    description: "Clear updates at every stage. You're always in the loop.",
+    description: "You’re kept informed at every stage of your build.",
   },
   {
-    icon: Zap,
-    title: "Fast Delivery",
-    description: "Efficient workflows mean faster implementation without compromising quality",
-  },
-  {
-    icon: DollarSign,
-    title: "Usage-Based Systems",
-    description: "You control costs with scalable, pay-as-you-grow automation",
-  },
-  {
-    icon: Shield,
-    title: "Secure & Scalable",
-    description: "Enterprise-grade security that grows with your business",
-  },
-  {
-    icon: Building2,
-    title: "Built for Real Businesses",
-    description: "Practical solutions for actual business challenges, not theoretical concepts",
-  },
-  {
-    icon: Unlock,
-    title: "No Lock-In",
-    description: "You own your system. Full transparency and control from day one",
-  },
-  {
-    icon: Target,
-    title: "Results-Focused",
-    description: "We measure success by time saved and productivity gained",
+    icon: BarChart3,
+    title: "Results You Can Measure",
+    description: "Every automation is designed to improve efficiency and output.",
   },
 ];
 
@@ -71,13 +59,13 @@ const WhyChoose = () => {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
               <Card
                 key={benefit.title}
-                className="p-6 glass hover:border-primary/30 transition-all duration-300 group"
+                className="p-6 glass border border-border/60 shadow-sm hover:border-primary/30 transition-all duration-300 group will-change-transform hover:-translate-y-1 hover:shadow-xl"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <div className="space-y-4">
