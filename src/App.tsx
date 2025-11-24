@@ -20,6 +20,8 @@ import Refund from "./pages/Refund";
 import Disclaimer from "./pages/Disclaimer";
 import ServiceAgreement from "./pages/ServiceAgreement";
 import NotFound from "./pages/NotFound";
+import Legal from "./pages/Legal";
+import ServicePricing from "./pages/ServicePricing";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/legal" element={<Legal />} />
           <Route path="/services" element={<Services />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/management-plans" element={<ManagementPlans />} />
@@ -47,6 +50,7 @@ const App = () => (
           <Route path="/refund" element={<Refund />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/service-agreement" element={<ServiceAgreement />} />
+          <Route path="/service-pricing" element={<ServicePricing />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -101,6 +101,15 @@ const Navigation = () => {
                 <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
               )}
             </Link>
+            <Link
+              to="/legal"
+              className={`group relative text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-md ${location.pathname.startsWith('/legal') ? 'text-foreground' : ''}`}
+            >
+              Legal
+              {location.pathname.startsWith('/legal') && (
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary rounded-full" />
+              )}
+            </Link>
             <Button
               asChild
               className="bg-primary hover:bg-primary/90 glow-primary"
@@ -169,6 +178,13 @@ const Navigation = () => {
               className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
             >
               About
+            </Link>
+            <Link
+              to="/legal"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Legal
             </Link>
             <Button
               asChild

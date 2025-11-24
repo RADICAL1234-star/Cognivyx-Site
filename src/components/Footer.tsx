@@ -73,6 +73,11 @@ const Footer = () => {
             <h3 className="font-heading font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/legal" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Legal Overview
+                </Link>
+              </li>
+              <li>
                 <Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Privacy Policy
                 </Link>
@@ -95,6 +100,11 @@ const Footer = () => {
               <li>
                 <Link to="/service-agreement" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                   Startup Service Agreement
+                </Link>
+              </li>
+              <li>
+                <Link to="/service-pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Service & Pricing Agreement
                 </Link>
               </li>
             </ul>
